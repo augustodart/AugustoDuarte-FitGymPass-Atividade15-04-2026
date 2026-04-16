@@ -1,0 +1,109 @@
+@startuml Diagrama de Classes
+
+class Aluno {
+
+    contratarPlano()
+    agendarAula()
+    cancelarAula()
+    atualizarStatus()
+    realizarPagamento()
+    registrarAcesso()
+    receberNotificacao()
+}
+
+class Plano {
+
+    ativar()
+    desativar()
+    alterarValor()
+}
+
+class Pagamento {
+
+    registrarPagamento()
+    confirmarPagamento()
+    cancelarPagamento()
+    gerarBoleto()
+}
+
+class Acesso {
+
+    registrarAcesso()
+    liberarAcesso()
+    bloquearAcesso()
+}
+
+class Aula {
+
+    disponibilizarHorario()
+    reservarVaga()
+    liberarVaga()
+    registrarPresenca()
+}
+
+class Agendamento {
+    
+    confirmar()
+    cancelar()
+}
+
+class Presenca {
+
+    registrarPresenca()
+}
+
+class AvaliacaoFisica {
+
+    registrarAvaliacao()
+    anexarArquivo()
+    atualizarDados()
+}
+
+class Notificacao {
+
+    enviarNotificacao()
+}
+
+abstract class Funcionario {
+
+}
+
+class Instrutor {
+
+    ministrarAula()
+    registrarAvaliacao()
+    registarPresenca()
+}
+
+class Recepcionista {
+
+    cadastrarAluno()
+    registrarPagamento()
+}
+
+class Gerente {
+
+    gerenciarPlano()
+    emitirRelatorio()
+}
+
+
+Funcionario <|-- Instrutor
+Funcionario <|-- Recepcionista
+Funcionario <|-- Gerente
+
+Aluno "1" -- "1" Plano : contrata
+Aluno "1" -- "0.." Pagamento : realiza
+Aluno "1" -- "0.." Acesso : gera
+Aluno "1" -- "0.." Agendamento : realiza
+Aluno "1" -- "0.." Presenca : possui
+Aluno "1" -- "0.." AvaliacaoFisica : possui
+Aluno "1" -- "0.." Aula : participa
+Aluno "1" -- "0.." Notificacao : recebe
+
+Instrutor "1" -- "0.." Aula : ministra
+Instrutor "1" -- "0.." AvaliacaoFisica : realiza
+Instrutor "1" -- "0.." Presenca : registra
+
+
+@enduml
